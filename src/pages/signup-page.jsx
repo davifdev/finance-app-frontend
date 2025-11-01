@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import z from "zod";
 
 import InputPassword from "@/components/input-password";
@@ -23,7 +22,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { api } from "@/lib/axios";
+import { useAuthContext } from "@/contexts/auth";
 
 const signupSchema = z
   .object({
@@ -54,19 +53,7 @@ const signupSchema = z
   });
 
 const SignUp = () => {
-  const createdUser = useMutation({
-    mutationKeyKey: ["createdUser"],
-    mutationFn: async (data) => {
-      const response = await api.post("/users", {
-        first_name: data.name,
-        last_name: data.lastname,
-        email: data.email,
-        password: data.password,
-      });
-      return response.data;
-    },
-  });
-
+  const { signup, user } = useAuthContext();
   const form = useForm({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -79,22 +66,10 @@ const SignUp = () => {
     },
   });
 
-  const signup = (data) => {
-    createdUser.mutate(data, {
-      onSuccess: () => {
-        const accessToken = createdUser.tokens.accessToken;
-        const refreshToken = createdUser.tokens.refreshTokenToken;
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
-        console.log("Usuário criado com sucesso!");
-      },
-      onError: () => {
-        console.log("Erro ao criar usuário");
-      },
-    });
-  };
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
-  console.log(createdUser.data);
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
       <Form {...form}>
