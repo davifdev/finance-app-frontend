@@ -34,10 +34,6 @@ const signinSchema = z.object({
     .min(6, "A senha deve ter no mínimo 6 caracteres"),
 });
 
-const signin = (data) => {
-  console.log(data);
-};
-
 const SignIn = () => {
   const form = useForm({
     resolver: zodResolver(signinSchema),
@@ -46,6 +42,10 @@ const SignIn = () => {
       password: "",
     },
   });
+
+  const signin = (data) => {
+    console.log(data);
+  };
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
