@@ -1,5 +1,10 @@
 import axios from "axios";
 
+import {
+  LOCAL_STORAGE_ACCESS_TOKEN_KEY,
+  LOCAL_STORAGE_REFRESH_TOKEN_KEY,
+} from "@/constants/localstorage-keys";
+
 export const publicApi = axios.create({
   baseURL: "https://fullstackclub-finance-dashboard-api.onrender.com/api",
 });
@@ -40,12 +45,12 @@ protectedApi.interceptors.response.use(
 
         const newAccessToken = response.data.accessToken;
         const newRefreshToken = response.data.refreshToken;
-        localStorage.setItem("accessToken", newAccessToken);
-        localStorage.setItem("refreshToken", newRefreshToken);
+        localStorage.setItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY, newAccessToken);
+        localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
         return protectedApi(request);
       } catch (error) {
-        localStorage.removeItemItem("accessToken");
-        localStorage.removeItemtem("refreshToken");
+        localStorage.removeItemItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY);
+        localStorage.removeItemtem(LOCAL_STORAGE_REFRESH_TOKEN_KEY);
         console.log(error);
       }
     }
