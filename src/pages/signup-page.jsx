@@ -66,6 +66,8 @@ const SignUp = () => {
     },
   });
 
+  console.log(user, signup);
+
   if (user) {
     return <Navigate to="/" />;
   }
@@ -178,7 +180,9 @@ const SignUp = () => {
               />
             </CardContent>
             <CardFooter>
-              <Button className="w-full cursor-pointer">Criar conta</Button>
+              <Button className="w-full cursor-pointer" type="submit">
+                Criar conta
+              </Button>
             </CardFooter>
           </Card>
         </form>

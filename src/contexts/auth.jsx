@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import createContext, { useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 import { api } from "@/lib/axios";
 
@@ -8,10 +8,6 @@ const AuthContext = createContext({
   signup: () => {},
   user: null,
 });
-
-export const useAuthContext = () => {
-  return useContext(AuthContext);
-};
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState();
@@ -56,4 +52,8 @@ export const AuthContextProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const useAuthContext = () => {
+  return useContext(AuthContext);
 };
