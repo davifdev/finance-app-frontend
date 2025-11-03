@@ -32,6 +32,23 @@ export const AuthContextProvider = ({ children }) => {
     },
   });
 
+  const signinMutation = useMutation({
+    mutationKey: ["signin"],
+    mutationFn: async (data) => {
+      const response = await api.post("/users/login", {
+        email: data.email,
+        password: data.password,
+      });
+      return {
+        id: response.data.id,
+        email: response.data.email,
+        name: response.data.first_name,
+        lastname: response.data.last_name,
+        tokens: response.data.tokens,
+      };
+    },
+  });
+
   const signup = async (data) => {
     try {
       const createdUser = await signupMutation.mutateAsync(data);
@@ -47,8 +64,22 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const signin = async (data) => {
+    try {
+      const loggedUser = await signinMutation.mutateAsync(data);
+      const accessToken = loggedUser.tokens.accessToken;
+      const refreshToken = loggedUser.tokens.refreshToken;
+      setUser(loggedUser);
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      console.log("Login realizado com sucesso!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(user);
   return (
-    <AuthContext.Provider value={{ user, signup }}>
+    <AuthContext.Provider value={{ user, signup, signin }}>
       {children}
     </AuthContext.Provider>
   );

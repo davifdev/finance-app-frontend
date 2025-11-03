@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import z from "zod";
 
 import InputPassword from "@/components/input-password";
@@ -21,6 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAuthContext } from "@/contexts/auth";
 
 const signinSchema = z.object({
   email: z
@@ -35,6 +36,8 @@ const signinSchema = z.object({
 });
 
 const SignIn = () => {
+  const { user, signin } = useAuthContext();
+
   const form = useForm({
     resolver: zodResolver(signinSchema),
     defaultValues: {
@@ -43,9 +46,9 @@ const SignIn = () => {
     },
   });
 
-  const signin = (data) => {
-    console.log(data);
-  };
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
