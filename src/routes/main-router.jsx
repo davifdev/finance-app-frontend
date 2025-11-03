@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { Toaster } from "@/components/ui/sonner";
 import { AuthContextProvider } from "@/contexts/auth";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
@@ -21,6 +22,7 @@ const MainRouter = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        <Toaster />
       </AuthContextProvider>
     </QueryClientProvider>
   );

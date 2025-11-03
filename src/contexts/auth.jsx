@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 import {
   LOCAL_STORAGE_ACCESS_TOKEN_KEY,
@@ -53,10 +54,10 @@ export const AuthContextProvider = ({ children }) => {
       const refreshToken = createdUser.tokens.refreshToken;
       setUser(createdUser);
       setTokens({ accessToken, refreshToken });
-      console.log("Usuário criado com sucesso!");
+      toast.success("Usuário criado com sucesso!");
     } catch (error) {
       console.log(error);
-      console.log("Erro ao criar usuário");
+      toast.error("Erro ao criar usuário");
     }
   };
 
@@ -67,9 +68,10 @@ export const AuthContextProvider = ({ children }) => {
       const refreshToken = loggedUser.tokens.refreshToken;
       setUser(loggedUser);
       setTokens({ accessToken, refreshToken });
-      console.log("Login realizado com sucesso!");
+      toast.success("Login realizado com sucesso!");
     } catch (error) {
       console.log(error);
+      toast.error("Erro ao logar usuário");
     }
   };
 
@@ -83,6 +85,7 @@ export const AuthContextProvider = ({ children }) => {
         setUser(response);
       } catch (error) {
         console.log(error);
+        toast.error("Erro ao reautenticar usuário");
         setUser(null);
       } finally {
         setLoading(false);
