@@ -25,8 +25,6 @@ protectedApi.interceptors.response.use(
   (response) => response,
   async (error) => {
     const request = error.config;
-    console.log(error);
-    console.log(request);
     const refreshToken = localStorage.getItem("refreshToken");
     if (!refreshToken) {
       return Promise.reject(error);
