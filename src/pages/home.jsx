@@ -1,6 +1,7 @@
 import { Loader2Icon } from "lucide-react";
 import { Navigate } from "react-router-dom";
 
+import Header from "@/components/header";
 import { useAuthContext } from "@/contexts/auth";
 
 const Home = () => {
@@ -17,11 +18,7 @@ const Home = () => {
   if (!user) {
     return <Navigate to="/signin" />;
   }
-  return (
-    <h2 className="text-3xl font-semibold">
-      Seja bem-vindo {user?.name} {user?.lastname}
-    </h2>
-  );
+  return <Header />;
 };
 
 export default Home;
