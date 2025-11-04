@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import { CalendarDaysIcon } from "lucide-react";
 
 import { Button } from "./button";
@@ -9,10 +11,29 @@ const DatePickerWithRange = ({ value, onChange }) => {
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline">
-          <CalendarDaysIcon /> Selecione uma data
+          <CalendarDaysIcon />
+          {value?.from ? (
+            value?.to ? (
+              <>
+                {format(value.from, "LLL dd, y", {
+                  locale: ptBR,
+                })}{" "}
+                -{" "}
+                {format(value.to, "LLL dd, y", {
+                  locale: ptBR,
+                })}
+              </>
+            ) : (
+              format(value.from, "LLL dd, y", {
+                locale: ptBR,
+              })
+            )
+          ) : (
+            <span>Selecione uma data</span>
+          )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent className="w-auto p-0">
         <Calendar
           mode="range"
           defaultMonth={value?.from}
@@ -20,6 +41,7 @@ const DatePickerWithRange = ({ value, onChange }) => {
           onSelect={onChange}
           numberOfMonths={2}
           className="rounded-lg border shadow-sm"
+          locale={ptBR}
         />
       </PopoverContent>
     </Popover>

@@ -8,6 +8,7 @@ const DateTransaction = () => {
     from: new Date(),
     to: addMonths(new Date(), 1),
   });
+
   return <DatePickerWithRange value={date} onChange={setDate} />;
 };
 
