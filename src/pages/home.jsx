@@ -1,9 +1,9 @@
-import { Loader2Icon, PlusIcon } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
 import { Navigate } from "react-router-dom";
 
+import AddTransactionButton from "@/components/add-transaction-button.";
 import DateSelection from "@/components/date-selection";
 import Header from "@/components/header";
-import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/contexts/auth";
 
 const Home = () => {
@@ -28,9 +28,7 @@ const Home = () => {
           <h2 className="text-2xl font-bold">Dashboard</h2>
           <div className="flex items-center gap-2">
             <DateSelection />
-            <Button>
-              Nova transação <PlusIcon />
-            </Button>
+            <AddTransactionButton />
           </div>
         </div>
       </div>
