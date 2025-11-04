@@ -11,6 +11,7 @@ import { UserService } from "@/services/user";
 const AuthContext = createContext({
   signin: () => {},
   signup: () => {},
+  signout: () => {},
   user: null,
   isLoading: true,
 });
@@ -26,12 +27,17 @@ const getTokens = () => {
   return { accessToken, refreshToken };
 };
 
+const removeTokens = () => {
+  localStorage.removeItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY);
+  localStorage.removeItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY);
+};
+
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [isLoading, setLoading] = useState(true);
 
   const signupMutation = useMutation({
-    mutationKeyKey: ["createdUser"],
+    mutationKey: ["signup"],
     mutationFn: async (data) => {
       const response = await UserService.signup(data);
       return response;
@@ -75,6 +81,11 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const signout = () => {
+    setUser(null);
+    removeTokens();
+  };
+
   useEffect(() => {
     const reAuth = async () => {
       try {
@@ -96,7 +107,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, signup, signin, isLoading }}>
+    <AuthContext.Provider value={{ user, signup, signin, isLoading, signout }}>
       {children}
     </AuthContext.Provider>
   );
