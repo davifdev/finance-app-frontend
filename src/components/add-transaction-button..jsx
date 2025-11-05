@@ -6,6 +6,7 @@ import {
   TrendingDownIcon,
   TrendingUpIcon,
 } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
 import { toast } from "sonner";
@@ -47,6 +48,7 @@ const addTransactionButtonSchema = z.object({
 });
 
 const AddTransactionButton = () => {
+  const [dialogIsOpen, setDialogIsOpen] = useState();
   const queryClient = useQueryClient();
   const { mutateAsync: createdTransaction } = useMutation({
     mutationKey: ["createdTransaction"],
@@ -66,12 +68,14 @@ const AddTransactionButton = () => {
       date: new Date(),
       type: "EARNING",
     },
+    shouldUnregister: true,
   });
 
   const onSubmit = async (data) => {
     try {
       await createdTransaction(data);
       toast.success("Transação criada com sucesso!");
+      setDialogIsOpen(false);
     } catch (error) {
       console.log(error);
       toast.error("Erro ao criar transação!");
@@ -79,7 +83,7 @@ const AddTransactionButton = () => {
   };
 
   return (
-    <Dialog>
+    <Dialog open={dialogIsOpen} onOpenChange={setDialogIsOpen}>
       <DialogTrigger asChild>
         <Button>
           Nova transação <PlusIcon />
