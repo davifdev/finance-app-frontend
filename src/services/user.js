@@ -60,8 +60,14 @@ export const UserService = {
       lastname: response.data.last_name,
     };
   },
+
+  /**
+   * Pega o balanço de transações do usuário autenticado
+   * @param {string} data.from - Data inicial - (yyyy-MM-dd)
+   * @param {stirng} data.to - Data final - (yyyy-MM-dd)
+   * @return {Object} Balanço de Transações
+   */
   getBalance: async (data) => {
-    console.log(data);
     const queryParams = new URLSearchParams();
     queryParams.set("from", data.from);
     queryParams.set("to", data.to);
