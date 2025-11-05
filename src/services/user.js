@@ -52,12 +52,22 @@ export const UserService = {
    * @return {Object} Usuário autenticado
    */
   me: async () => {
-    const response = await protectedApi("/users/me");
+    const response = await protectedApi.get("/users/me");
     return {
       id: response.data.id,
       name: response.data.first_name,
       email: response.data.email,
       lastname: response.data.last_name,
     };
+  },
+  getBalance: async (data) => {
+    console.log(data);
+    const queryParams = new URLSearchParams();
+    queryParams.set("from", data.from);
+    queryParams.set("to", data.to);
+    const response = await protectedApi.get(
+      `/users/me/balance?${queryParams.toString()}`
+    );
+    return response.data;
   },
 };

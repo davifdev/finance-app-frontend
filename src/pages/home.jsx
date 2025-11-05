@@ -1,11 +1,10 @@
-import { Loader2Icon, Wallet } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
 import { Navigate } from "react-router-dom";
 
 import AddTransactionButton from "@/components/add-transaction-button.";
 import Balance from "@/components/balance";
 import DateSelection from "@/components/date-selection";
 import Header from "@/components/header";
-import BalanceItem from "@/components/ui/balance-item";
 import { Card } from "@/components/ui/card";
 import { useAuthContext } from "@/contexts/auth";
 
