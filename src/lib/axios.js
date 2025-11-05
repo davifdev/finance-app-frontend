@@ -47,8 +47,8 @@ protectedApi.interceptors.response.use(
         localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
         return protectedApi(request);
       } catch (error) {
-        localStorage.removeItemItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY);
-        localStorage.removeItemtem(LOCAL_STORAGE_REFRESH_TOKEN_KEY);
+        localStorage.removeItem(LOCAL_STORAGE_ACCESS_TOKEN_KEY);
+        localStorage.removeItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY);
         console.log(error);
       }
     }
