@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   PiggyBankIcon,
   PlusIcon,
@@ -7,7 +8,10 @@ import {
 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
+import { toast } from "sonner";
 import z from "zod";
+
+import { TransactionService } from "@/services/transaction";
 
 import { Button } from "./ui/button";
 import { DatePickerDemo } from "./ui/date-picker-demo";
@@ -43,6 +47,17 @@ const addTransactionButtonSchema = z.object({
 });
 
 const AddTransactionButton = () => {
+  const queryClient = useQueryClient();
+  const { mutateAsync: createdTransaction } = useMutation({
+    mutationKey: ["createdTransaction"],
+    mutationFn: async (data) => {
+      const response = await TransactionService.create(data);
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["getBalance"]);
+    },
+  });
   const form = useForm({
     resolver: zodResolver(addTransactionButtonSchema),
     defaultValues: {
@@ -53,8 +68,14 @@ const AddTransactionButton = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await createdTransaction(data);
+      toast.success("Transação criada com sucesso!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Erro ao criar transação!");
+    }
   };
 
   return (
