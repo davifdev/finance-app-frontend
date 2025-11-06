@@ -1,3 +1,4 @@
+import { Loader2Icon } from "lucide-react";
 import { Link, Navigate } from "react-router-dom";
 
 import InputPassword from "@/components/input-password";
@@ -47,7 +48,11 @@ const SignIn = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Digite seu e-mail" {...field} />
+                      <Input
+                        disabled={form.formState.isSubmitting}
+                        placeholder="Digite seu e-mail"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -60,6 +65,7 @@ const SignIn = () => {
                   <FormItem>
                     <FormControl>
                       <InputPassword
+                        disabled={form.formState.isSubmitting}
                         placeholder="Digite sua senha"
                         {...field}
                       />
@@ -70,7 +76,12 @@ const SignIn = () => {
               />
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Entrar</Button>
+              <Button className="w-full" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting && (
+                  <Loader2Icon className="animate-spin" />
+                )}
+                Entrar
+              </Button>
             </CardFooter>
           </Card>
         </form>
