@@ -49,7 +49,7 @@ const DateSelection = () => {
       ["getBalance"],
       formatDateToQueryParam(date.from),
       formatDateToQueryParam(date.to),
-      user
+      user.id
     );
   }, [date, navigate, queryClient, user]);
 
