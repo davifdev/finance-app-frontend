@@ -1,7 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
-import z from "zod";
 
 import InputPassword from "@/components/input-password";
 import { Button } from "@/components/ui/button";
@@ -22,29 +19,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAuthContext } from "@/contexts/auth";
-
-const signinSchema = z.object({
-  email: z
-    .string()
-    .email("E-mail inválido")
-    .trim()
-    .nonempty("O e-mail é obrigatório"),
-  password: z
-    .string()
-    .nonempty("A senha é obrigatória")
-    .min(6, "A senha deve ter no mínimo 6 caracteres"),
-});
+import { useSigninForm } from "@/form/hooks/signin";
 
 const SignIn = () => {
   const { user, signin } = useAuthContext();
-
-  const form = useForm({
-    resolver: zodResolver(signinSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  const { form } = useSigninForm();
 
   if (user) {
     return <Navigate to="/" />;
