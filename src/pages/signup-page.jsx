@@ -1,3 +1,4 @@
+import { Loader2Icon } from "lucide-react";
 import { Link, Navigate } from "react-router-dom";
 
 import InputPassword from "@/components/input-password";
@@ -48,7 +49,11 @@ const SignUp = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Digite seu nome" {...field} />
+                      <Input
+                        disabled={form.formState.isSubmitting}
+                        placeholder="Digite seu nome"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -60,7 +65,11 @@ const SignUp = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Digite seu sobrenome" {...field} />
+                      <Input
+                        disabled={form.formState.isSubmitting}
+                        placeholder="Digite seu sobrenome"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -72,7 +81,11 @@ const SignUp = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Digite seu e-mail" {...field} />
+                      <Input
+                        disabled={form.formState.isSubmitting}
+                        placeholder="Digite seu e-mail"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -85,6 +98,7 @@ const SignUp = () => {
                   <FormItem>
                     <FormControl>
                       <InputPassword
+                        disabled={form.formState.isSubmitting}
                         placeholder="Digite sua senha"
                         {...field}
                       />
@@ -100,6 +114,7 @@ const SignUp = () => {
                   <FormItem>
                     <FormControl>
                       <InputPassword
+                        disabled={form.formState.isSubmitting}
                         placeholder="Digite sua senha novamente"
                         {...field}
                       />
@@ -138,7 +153,14 @@ const SignUp = () => {
               />
             </CardContent>
             <CardFooter>
-              <Button className="w-full cursor-pointer" type="submit">
+              <Button
+                className="w-full cursor-pointer"
+                type="submit"
+                disabled={form.formState.isSubmitting}
+              >
+                {form.formState.isSubmitting && (
+                  <Loader2Icon className="animate-spin" />
+                )}
                 Criar conta
               </Button>
             </CardFooter>
