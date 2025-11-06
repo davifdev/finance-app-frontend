@@ -1,4 +1,5 @@
 import {
+  Loader2Icon,
   PiggyBankIcon,
   PlusIcon,
   TrendingDownIcon,
@@ -66,7 +67,11 @@ const AddTransactionButton = () => {
                 <FormItem>
                   <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input placeholder="Nome da transação" {...field} />
+                    <Input
+                      disabled={form.formState.isSubmitting}
+                      placeholder="Nome da transação"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -80,6 +85,7 @@ const AddTransactionButton = () => {
                   <FormLabel>Valor</FormLabel>
                   <FormControl>
                     <NumericFormat
+                      disabled={form.formState.isSubmitting}
                       placeholder="Digite o valor da transação"
                       thousandSeparator="."
                       decimalSeparator=","
@@ -105,6 +111,7 @@ const AddTransactionButton = () => {
                   <FormLabel>Nome</FormLabel>
                   <FormControl>
                     <DatePickerDemo
+                      disabled={form.formState.isSubmitting}
                       placeholder="Selecione a data da transação"
                       {...field}
                     />
@@ -126,6 +133,7 @@ const AddTransactionButton = () => {
                           field.value === "EARNING" ? "secondary" : "outline"
                         }
                         onClick={() => field.onChange("EARNING")}
+                        disabled={form.formState.isSubmitting}
                       >
                         <TrendingUpIcon className="text-primary-green" />
                         Ganho
@@ -136,6 +144,7 @@ const AddTransactionButton = () => {
                           field.value === "EXPENSE" ? "secondary" : "outline"
                         }
                         onClick={() => field.onChange("EXPENSE")}
+                        disabled={form.formState.isSubmitting}
                       >
                         <TrendingDownIcon className="text-primary-red" />
                         Gasto
@@ -146,6 +155,7 @@ const AddTransactionButton = () => {
                           field.value === "INVESTMENT" ? "secondary" : "outline"
                         }
                         onClick={() => field.onChange("INVESTMENT")}
+                        disabled={form.formState.isSubmitting}
                       >
                         <PiggyBankIcon className="text-primary-blue" />
                         Investimento
@@ -158,11 +168,20 @@ const AddTransactionButton = () => {
             />
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="secondary" className="flex-1">
+                <Button
+                  variant="secondary"
+                  className="flex-1"
+                  disabled={form.formState.isSubmitting}
+                >
                   Cancelar
                 </Button>
               </DialogClose>
-              <Button className="flex-1">Adicionar</Button>
+              <Button className="flex-1" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting && (
+                  <Loader2Icon className="animate-spin" />
+                )}
+                Adicionar
+              </Button>
             </DialogFooter>
           </form>
         </Form>
