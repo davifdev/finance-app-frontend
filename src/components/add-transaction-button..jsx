@@ -9,9 +9,11 @@ import {
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import z from "zod";
 
+import { useAuthContext } from "@/contexts/auth";
 import { TransactionService } from "@/services/transaction";
 
 import { Button } from "./ui/button";
@@ -48,6 +50,10 @@ const addTransactionButtonSchema = z.object({
 });
 
 const AddTransactionButton = () => {
+  const { user } = useAuthContext();
+  const [searchParams] = useSearchParams();
+  const from = searchParams.get("from");
+  const to = searchParams.get("to");
   const [dialogIsOpen, setDialogIsOpen] = useState();
   const queryClient = useQueryClient();
   const { mutateAsync: createdTransaction } = useMutation({
@@ -57,7 +63,7 @@ const AddTransactionButton = () => {
       return response;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["getBalance"]);
+      queryClient.invalidateQueries(["getBalance"], from, to, user);
     },
   });
   const form = useForm({

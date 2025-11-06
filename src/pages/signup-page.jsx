@@ -66,8 +66,6 @@ const SignUp = () => {
     },
   });
 
-  console.log(user, signup);
-
   if (user) {
     return <Navigate to="/" />;
   }

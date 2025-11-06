@@ -7,16 +7,18 @@ import {
 } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 
+import { useAuthContext } from "@/contexts/auth";
 import { UserService } from "@/services/user";
 
 import BalanceItem from "./ui/balance-item";
 
 const Balance = () => {
+  const { user } = useAuthContext();
   const [searchParams] = useSearchParams();
   const from = searchParams.get("from");
   const to = searchParams.get("to");
   const { data } = useQuery({
-    queryKey: ["getBalance"],
+    queryKey: ["getBalance", from, to, user],
     queryFn: async () => {
       const response = await UserService.getBalance({ from, to });
       return response;

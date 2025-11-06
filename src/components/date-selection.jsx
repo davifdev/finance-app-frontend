@@ -3,11 +3,14 @@ import { addMonths, format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import { useAuthContext } from "@/contexts/auth";
+
 import DatePickerWithRange from "./ui/date-picker-with-range";
 
 const formatDateToQueryParam = (date) => format(date, "yyyy-MM-dd");
 
 const DateSelection = () => {
+  const { user } = useAuthContext();
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
   const from = searchParams.get("from");
@@ -24,8 +27,13 @@ const DateSelection = () => {
     queryParams.set("from", formatDateToQueryParam(date.from));
     queryParams.set("to", formatDateToQueryParam(date.to));
     navigate(`/?${queryParams.toString()}`);
-    queryClient.invalidateQueries(["getBalance"]);
-  }, [date, navigate, queryClient]);
+    queryClient.invalidateQueries(
+      ["getBalance"],
+      formatDateToQueryParam(date.from),
+      formatDateToQueryParam(date.to),
+      user
+    );
+  }, [date, navigate, queryClient, user]);
 
   return <DatePickerWithRange value={date} onChange={setDate} />;
 };
