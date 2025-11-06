@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   PiggyBankIcon,
   PlusIcon,
@@ -12,9 +11,7 @@ import { NumericFormat } from "react-number-format";
 import { toast } from "sonner";
 import z from "zod";
 
-import { getBalanceQueryKey } from "@/api/hooks/user";
-import { TransactionService } from "@/api/services/transaction";
-import { useAuthContext } from "@/contexts/auth";
+import { useAddTransaction } from "@/api/hooks/transaction";
 
 import { Button } from "./ui/button";
 import { DatePickerDemo } from "./ui/date-picker-demo";
@@ -39,7 +36,7 @@ import {
 import { Input } from "./ui/input";
 
 const addTransactionButtonSchema = z.object({
-  name: z.string().trim().min(1, "O nome da transação é obrigatporio"),
+  name: z.string().trim().min(1, "O nome da transação é obrigatório"),
   amount: z.number({
     required_error: "O valor é obrigatório",
   }),
@@ -50,19 +47,8 @@ const addTransactionButtonSchema = z.object({
 });
 
 const AddTransactionButton = () => {
-  const { user } = useAuthContext();
   const [dialogIsOpen, setDialogIsOpen] = useState();
-  const queryClient = useQueryClient();
-  const { mutateAsync: createdTransaction } = useMutation({
-    mutationKey: ["createdTransaction"],
-    mutationFn: async (data) => {
-      const response = await TransactionService.create(data);
-      return response;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(getBalanceQueryKey({ userId: user.id }));
-    },
-  });
+  const { mutateAsync: createdTransaction } = useAddTransaction();
   const form = useForm({
     resolver: zodResolver(addTransactionButtonSchema),
     defaultValues: {
