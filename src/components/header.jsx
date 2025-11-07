@@ -27,7 +27,7 @@ const Header = () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline">
-              <Avatar className="h-8 w-8">
+              <Avatar className="h-7 w-7">
                 <AvatarImage src="https://gihub.com/shadcn.png" alt="@shadcn" />
                 <AvatarFallback className="text-xs">
                   {user?.name[0]}

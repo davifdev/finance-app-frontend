@@ -5,6 +5,7 @@ import AddTransactionButton from "@/components/add-transaction-button.";
 import Balance from "@/components/balance";
 import DateSelection from "@/components/date-selection";
 import Header from "@/components/header";
+import TransactionsTable from "@/components/transactions-table";
 import { Card } from "@/components/ui/card";
 import { useAuthContext } from "@/contexts/auth";
 
@@ -37,6 +38,7 @@ const Home = () => {
           <Balance />
           <Card></Card>
         </div>
+        <TransactionsTable />
       </div>
     </>
   );

@@ -17,4 +17,18 @@ export const TransactionService = {
     });
     return response.data;
   },
+  /**
+   * Transações do usuário autenticado
+   * @param {string} data.from - Data inicial (yyyy-MM-dd)
+   * @param {string} data.to - Data final (yyyy-MM-dd)
+   */
+  getTransactions: async (data) => {
+    const queryParams = new URLSearchParams();
+    queryParams.set("from", data.from);
+    queryParams.set("to", data.to);
+    const response = await protectedApi.get(
+      `/transactions/me?${queryParams.toString()}`
+    );
+    return response.data;
+  },
 };
