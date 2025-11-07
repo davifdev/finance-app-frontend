@@ -57,8 +57,11 @@ export const DataTable = ({ columns, data }) => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+              <TableCell
+                colSpan={columns.length}
+                className="text-muted-foreground h-24 text-center"
+              >
+                Nenhuma transação foi encontrada...
               </TableCell>
             </TableRow>
           )}
