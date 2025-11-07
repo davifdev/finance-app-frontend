@@ -1,3 +1,5 @@
+import { formatCurrency } from "@/helpers/formatCurrency";
+
 import { Card, CardContent } from "./card";
 
 const BalanceItem = ({ icon, amount, text }) => {
@@ -11,12 +13,7 @@ const BalanceItem = ({ icon, amount, text }) => {
             </div>
             <span className="text-muted-foreground text-sm">{text}</span>
           </div>
-          <p className="text-2xl font-semibold">
-            {new Intl.NumberFormat("pt-br", {
-              style: "currency",
-              currency: "BRL",
-            }).format(amount)}
-          </p>
+          <p className="text-2xl font-semibold">{formatCurrency(amount)}</p>
         </div>
       </CardContent>
     </Card>
