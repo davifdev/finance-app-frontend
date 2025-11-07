@@ -22,6 +22,8 @@ export const useGetBalance = ({ from, to }) => {
       const response = await UserService.getBalance({ from, to });
       return response;
     },
+    staleTime: 5 * 1000 * 60,
+    enabled: Boolean(from) && Boolean(to) && Boolean(user),
   });
 };
 
