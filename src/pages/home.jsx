@@ -23,6 +23,7 @@ const Home = () => {
   if (!user) {
     return <Navigate to="/signin" />;
   }
+
   return (
     <>
       <Header />

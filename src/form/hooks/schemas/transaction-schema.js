@@ -10,3 +10,7 @@ export const addTransactionButtonSchema = z.object({
   }),
   type: z.enum(["EARNING", "EXPENSE", "INVESTMENT"]),
 });
+
+export const editTransactionButtonSchema = addTransactionButtonSchema.extend({
+  id: z.string().uuid(),
+});

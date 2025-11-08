@@ -30,7 +30,6 @@ export const getTransactionQueryKey = ({ userId, from, to }) => {
   if (!from || !to) {
     return ["getTransaction", userId];
   }
-  console.log(userId);
   return ["getTransaction", from, to, userId];
 };
 

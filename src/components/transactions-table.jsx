@@ -47,8 +47,8 @@ export const columns = [
   {
     accessorKey: "actions",
     header: "Ações",
-    cell: () => {
-      return <EditTransactionButton />;
+    cell: ({ row: { original: transaction } }) => {
+      return <EditTransactionButton transaction={transaction} />;
     },
   },
 ];

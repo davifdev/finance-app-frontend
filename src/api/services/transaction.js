@@ -31,4 +31,21 @@ export const TransactionService = {
     );
     return response.data;
   },
+  /**
+   * Editar transação
+   * @param {string} data.id - ID da transação
+   * @param {string} data.name - Nome da transação
+   * @param {string} data.type - Tipo da transação (EARNING/EXPENSE/INVESTMENT)
+   * @param {string} data.date - Data da transação (yyyy-MM-dd)
+   * @param {string} data.amount - Valor da transação R$ 15.000,00
+   */
+  update: async (data) => {
+    const response = await protectedApi.patch(`/transactions/me/${data.id}`, {
+      name: data.name,
+      date: data.date,
+      amount: data.amount,
+      type: data.type,
+    });
+    return response.data;
+  },
 };
