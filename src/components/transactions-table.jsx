@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { useGetTransactions } from "@/api/hooks/transaction";
 import { formatCurrency } from "@/helpers/formatCurrency";
 
+import EditTransactionButton from "./edit-transaction-button";
 import TransactionTypeBadge from "./transaction-type-badge";
 import { Button } from "./ui/button";
 import { DataTable } from "./ui/data-table";
@@ -47,11 +48,7 @@ export const columns = [
     accessorKey: "actions",
     header: "Ações",
     cell: () => {
-      return (
-        <Button size="icon-sm" variant="ghost">
-          <ExternalLink className="text-muted-foreground" size={16} />
-        </Button>
-      );
+      return <EditTransactionButton />;
     },
   },
 ];

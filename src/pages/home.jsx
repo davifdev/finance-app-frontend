@@ -15,7 +15,7 @@ const Home = () => {
   if (isLoading) {
     return (
       <div className="flex items-center gap-2 p-2">
-        <h2>Carregando</h2>
+        <h2>Carregando...</h2>
         <Loader2Icon className="animate-spin" />
       </div>
     );
