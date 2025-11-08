@@ -14,6 +14,7 @@ const getDateTransaction = (searchParams) => {
     from: new Date(),
     to: addMonths(new Date(), 1),
   };
+  4;
   const from = searchParams.get("from");
   const to = searchParams.get("to");
 
@@ -21,7 +22,7 @@ const getDateTransaction = (searchParams) => {
     return defaultDate;
   }
 
-  const checkDateIsValid = isValid(new Date(from)) || isValid(new Date(to));
+  const checkDateIsValid = !isValid(new Date(from)) || !isValid(new Date(to));
   if (checkDateIsValid) {
     return defaultDate;
   }
