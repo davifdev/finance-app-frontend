@@ -6,11 +6,11 @@ import {
 } from "@/constants/localstorage-keys";
 
 export const publicApi = axios.create({
-  baseURL: "https://fullstackclub-finance-dashboard-api.onrender.com/api",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 export const protectedApi = axios.create({
-  baseURL: "https://fullstackclub-finance-dashboard-api.onrender.com/api",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 protectedApi.interceptors.request.use((request) => {

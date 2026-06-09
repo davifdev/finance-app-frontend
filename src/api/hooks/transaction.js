@@ -30,7 +30,7 @@ export const getTransactionQueryKey = ({ userId, from, to }) => {
   if (!from || !to) {
     return ["getTransaction", userId];
   }
-  return ["getTransaction", from, to, userId];
+  return ["getTransaction", userId, from, to];
 };
 
 export const useGetTransactions = ({ from, to }) => {
@@ -41,6 +41,7 @@ export const useGetTransactions = ({ from, to }) => {
       const response = await TransactionService.getTransactions({ from, to });
       return response;
     },
+    staleTime: 5 * 1000 * 60,
     enabled: Boolean(from) && Boolean(to) && Boolean(user),
   });
 };

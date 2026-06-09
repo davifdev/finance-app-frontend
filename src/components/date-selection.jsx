@@ -45,6 +45,7 @@ const DateSelection = () => {
     const queryParams = new URLSearchParams();
     queryParams.set("from", formatDateToQueryParam(date.from));
     queryParams.set("to", formatDateToQueryParam(date.to));
+    console.log(date);
     navigate(`/?${queryParams.toString()}`);
     queryClient.invalidateQueries(
       ["getBalance"],

@@ -1,6 +1,5 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { ExternalLink } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 
 import { useGetTransactions } from "@/api/hooks/transaction";
@@ -8,7 +7,6 @@ import { formatCurrency } from "@/helpers/formatCurrency";
 
 import EditTransactionButton from "./edit-transaction-button";
 import TransactionTypeBadge from "./transaction-type-badge";
-import { Button } from "./ui/button";
 import { DataTable } from "./ui/data-table";
 import { ScrollArea } from "./ui/scroll-area";
 

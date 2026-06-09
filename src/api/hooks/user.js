@@ -11,7 +11,7 @@ export const getBalanceQueryKey = ({ userId, from, to }) => {
     return ["getBalance", userId];
   }
 
-  return ["getBalance", from, to, userId];
+  return ["getBalance", userId, from, to];
 };
 
 export const useGetBalance = ({ from, to }) => {
@@ -19,7 +19,7 @@ export const useGetBalance = ({ from, to }) => {
   return useQuery({
     queryKey: getBalanceQueryKey({ userId: user.id, from, to }),
     queryFn: async () => {
-      const response = await UserService.getBalance({ from, to });
+      const response = UserService.getBalance({ from, to });
       return response;
     },
     staleTime: 5 * 1000 * 60,
@@ -41,7 +41,7 @@ export const useSignup = () => {
   return useMutation({
     mutationKey: signupMutationKey,
     mutationFn: async (data) => {
-      const response = await UserService.signup(data);
+      const response = UserService.signup(data);
       return response;
     },
   });

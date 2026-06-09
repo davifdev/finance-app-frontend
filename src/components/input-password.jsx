@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
 const InputPassword = ({ placeholder, ...props }) => {
-  const [passwordIsVisible, setPasswordIsVisivle] = useState(false);
+  const [passwordIsVisible, setPasswordIsVisible] = useState(false);
   return (
     <div className="relative">
       <Input
@@ -17,7 +17,7 @@ const InputPassword = ({ placeholder, ...props }) => {
         type="button"
         variant="ghost"
         className="text-muted-foreground absolute top-0 right-0 bottom-0 my-auto mr-1 h-7 w-7 cursor-pointer"
-        onClick={() => setPasswordIsVisivle(!passwordIsVisible)}
+        onClick={() => setPasswordIsVisible(!passwordIsVisible)}
       >
         {passwordIsVisible ? <EyeOff /> : <EyeIcon />}
       </Button>

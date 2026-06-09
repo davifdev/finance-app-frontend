@@ -28,7 +28,7 @@ export const UserService = {
     };
   },
   /**
-   * Criação de um novo Usuário
+   * Login de um Usuário
    * @param {string} data.email - E-mail do usuário
    * @param {stirng} data.password - Senha do usuário
    * @return {Object} Usuário Logado
