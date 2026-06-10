@@ -1,4 +1,5 @@
 import { Trash2Icon } from "lucide-react";
+import { toast } from "sonner";
 
 import { useDeleteTransaction } from "@/api/hooks/transaction";
 
@@ -20,6 +21,7 @@ const DeleteTransactionButton = ({ transactionId }) => {
 
   const handleContinueClick = async () => {
     await deleteTransaction({ id: transactionId });
+    toast.success("Tarefa deletada com sucesso");
   };
 
   return (
