@@ -48,4 +48,14 @@ export const TransactionService = {
     });
     return response.data;
   },
+
+  /**
+   * Deletar transação
+   * @param {string} data.id - ID da transação
+   */
+  delete: async (data) => {
+    console.log(data);
+    const response = await protectedApi.delete(`/transactions/me/${data.id}`);
+    return response.data;
+  },
 };

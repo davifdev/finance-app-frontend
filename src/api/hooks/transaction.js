@@ -7,6 +7,7 @@ import { getBalanceQueryKey } from "./user";
 
 const addTransactionMutationKey = ["createdTransaction"];
 const editTransactionMutationKey = ["editTransaction"];
+const deleteTransactionMutationKey = ["deleteTransaction"];
 
 export const useAddTransaction = () => {
   const queryClient = useQueryClient();
@@ -53,6 +54,25 @@ export const useEditTransaction = () => {
     mutationKey: editTransactionMutationKey,
     mutationFn: async (data) => {
       const response = await TransactionService.update(data);
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(getBalanceQueryKey({ userId: user.id }));
+      queryClient.invalidateQueries(
+        getTransactionQueryKey({ userId: user.id })
+      );
+    },
+  });
+};
+
+export const useDeleteTransaction = () => {
+  const { user } = useAuthContext();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: deleteTransactionMutationKey,
+    mutationFn: async (data) => {
+      const response = await TransactionService.delete(data);
       return response;
     },
     onSuccess: () => {
