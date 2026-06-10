@@ -5,6 +5,7 @@ import AddTransactionButton from "@/components/add-transaction-button.";
 import Balance from "@/components/balance";
 import DateSelection from "@/components/date-selection";
 import Header from "@/components/header";
+import PieChartWithPaddingAngle from "@/components/pieChart-with-padding-angle";
 import TransactionsTable from "@/components/transactions-table";
 import { Card } from "@/components/ui/card";
 import { useAuthContext } from "@/contexts/auth";
@@ -28,16 +29,18 @@ const Home = () => {
     <>
       <Header />
       <div className="space-y-6 p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
           <h2 className="text-2xl font-bold">Dashboard</h2>
           <div className="flex items-center gap-2">
             <DateSelection />
             <AddTransactionButton />
           </div>
         </div>
-        <div className="grid grid-cols-[2fr_1fr] gap-6">
+        <div className="grid grid-cols-[2fr_1fr] gap-3 md:gap-6">
           <Balance />
-          <Card></Card>
+          <Card>
+            <PieChartWithPaddingAngle />
+          </Card>
         </div>
         <TransactionsTable />
       </div>

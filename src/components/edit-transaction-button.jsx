@@ -46,13 +46,13 @@ const EditTransactionButton = ({ transaction }) => {
   });
 
   return (
-    <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
+    <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen} className="m">
       <SheetTrigger asChild>
         <Button size="icon-sm" variant="ghost">
           <ExternalLink className="text-muted-foreground" size={16} />
         </Button>
       </SheetTrigger>
-      <SheetContent className="min-w-[450px] p-4">
+      <SheetContent className="p-4 md:min-w-[450px]">
         <SheetHeader>
           <SheetTitle>Transação</SheetTitle>
         </SheetHeader>
@@ -134,7 +134,13 @@ const EditTransactionButton = ({ transaction }) => {
                         disabled={form.formState.isSubmitting}
                       >
                         <TrendingUpIcon className="text-primary-green" />
-                        Ganho
+                        <span
+                          className="max-w-[81px] truncate md:max-w-full"
+                          aria-label="Ganho"
+                          title="Ganho"
+                        >
+                          Ganho
+                        </span>
                       </Button>
                       <Button
                         type="button"
@@ -145,7 +151,13 @@ const EditTransactionButton = ({ transaction }) => {
                         disabled={form.formState.isSubmitting}
                       >
                         <TrendingDownIcon className="text-primary-red" />
-                        Gasto
+                        <span
+                          className="max-w-[81px] truncate md:max-w-full"
+                          aria-label="Gasto"
+                          title="Gasto"
+                        >
+                          Gasto
+                        </span>
                       </Button>
                       <Button
                         type="button"
@@ -156,7 +168,13 @@ const EditTransactionButton = ({ transaction }) => {
                         disabled={form.formState.isSubmitting}
                       >
                         <PiggyBankIcon className="text-primary-blue" />
-                        Investimento
+                        <span
+                          className="max-w-[91px] truncate md:max-w-full"
+                          aria-label="Investimento"
+                          title="Investimento"
+                        >
+                          Investimento
+                        </span>
                       </Button>
                     </div>
                   </FormControl>

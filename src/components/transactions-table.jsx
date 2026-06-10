@@ -9,7 +9,7 @@ import DeleteTransactionButton from "./delete-transaction-button";
 import EditTransactionButton from "./edit-transaction-button";
 import TransactionTypeBadge from "./transaction-type-badge";
 import { DataTable } from "./ui/data-table";
-import { ScrollArea } from "./ui/scroll-area";
+import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 
 export const columns = [
   {
@@ -71,6 +71,7 @@ const TransactionsTable = () => {
       <h2 className="text-2xl font-bold">Transações</h2>
       <ScrollArea className="h-[370px] max-h-[370px] rounded-md border">
         <DataTable columns={columns} data={transactions} />
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </>
   );
